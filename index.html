@@ -1,0 +1,922 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="format-detection" content="telephone=no">
+<title>Studio Tan · 谭老师钢琴课 | 一对一钢琴 · 线上 / XXX</title>
+<meta name="description" content="Studio Tan，谭老师的一对一钢琴课。成人零基础、孩子启蒙，线上腾讯会议 / 线下 XXX。看看学员 Z 的真实学习记录。">
+<meta property="og:title" content="Studio Tan · 谭老师钢琴课">
+<meta property="og:description" content="一对一钢琴课，成人零基础、孩子启蒙。线上腾讯会议 / 线下 XXX。">
+<meta name="theme-color" content="#F3F1EC">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<!-- 字体文件都放在 fonts/ 里，不依赖 Google，国内也能正常显示。中文用系统自带的苹方 / 微软雅黑 / 思源黑体 -->
+<link rel="preload" href="fonts/instrument-serif.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/instrument-serif-italic.woff2" as="font" type="font/woff2" crossorigin>
+<style>
+@font-face{font-family:"Instrument Serif";font-style:normal;font-weight:400;font-display:swap;src:url(fonts/instrument-serif.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:"Instrument Serif";font-style:italic;font-weight:400;font-display:swap;src:url(fonts/instrument-serif-italic.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:"Inter";font-style:normal;font-weight:300 500;font-display:swap;src:url(fonts/inter-latin.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+:root{
+  --bg:#F3F1EC; --bg-2:#EAE7DF;
+  --ink:#111; --ink-2:#3b3935; --muted:#8a857c; --line:rgba(17,17,17,.14);
+  --night:#111; --on-night:#F3F1EC; --on-night-2:rgba(243,241,236,.78); --on-night-muted:rgba(243,241,236,.5); --night-line:rgba(243,241,236,.16);
+  --serif:"Instrument Serif","Times New Roman",Georgia,serif;
+  --sans:Inter,-apple-system,BlinkMacSystemFont,"PingFang SC","Noto Sans SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+  --ease:cubic-bezier(.2,.7,.2,1);
+  color-scheme:light;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.75;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit}
+ol,ul{list-style:none}
+em{font-style:italic}
+.wrap{max-width:1280px;margin:0 auto;padding:0 40px}
+section[id]{scroll-margin-top:72px}
+.serif{font-family:var(--serif);font-weight:400}
+
+/* 待填写：虚线下划线 */
+.todo{border-bottom:1px dashed currentColor;background:rgba(17,17,17,.05);padding:0 4px;color:var(--muted);font-style:normal}
+.dark .todo{background:rgba(243,241,236,.08);color:var(--on-night-muted)}
+
+/* 滚动渐显 */
+.js .reveal{opacity:0;transform:translateY(28px);transition:opacity 1s var(--ease),transform 1s var(--ease)}
+.js .reveal.in{opacity:1;transform:none}
+
+/* ---------- 顶部 ---------- */
+.top{position:sticky;top:0;z-index:20;background:rgba(243,241,236,.86);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border-bottom:1px solid transparent;transition:border-color .3s}
+.top.scrolled{border-bottom-color:var(--line)}
+.top-in{display:flex;align-items:center;gap:36px;height:72px}
+.logo{font-family:var(--serif);font-size:27px;line-height:1;letter-spacing:-.01em;white-space:nowrap}
+.logo small{font-family:var(--sans);font-size:11px;letter-spacing:.18em;color:var(--muted);margin-left:10px;vertical-align:4px}
+.nav{display:flex;gap:30px;margin-left:auto;font-size:14px;color:var(--ink-2)}
+.nav a{position:relative}
+.nav a::after{content:"";position:absolute;left:0;right:0;bottom:-2px;height:1px;background:currentColor;transform:scaleX(0);transform-origin:right;transition:transform .4s var(--ease)}
+.nav a:hover::after{transform:scaleX(1);transform-origin:left}
+.pill{display:inline-flex;align-items:center;justify-content:center;gap:10px;height:50px;padding:0 28px;border-radius:999px;background:var(--ink);color:var(--bg);font-size:15px;font-weight:500;letter-spacing:.02em;border:0;cursor:pointer;white-space:nowrap;transition:transform .35s var(--ease),background .3s}
+.pill:hover{transform:translateY(-2px);background:#2b2b2b}
+.pill-sm{height:38px;padding:0 18px;font-size:13px}
+.pill-light{background:var(--on-night);color:var(--night)}
+.pill-light:hover{background:#fff}
+
+/* ---------- 首屏 ---------- */
+.hero{padding-top:48px}
+.hero-grid{display:grid;grid-template-columns:1fr 300px;gap:64px;align-items:end}
+.hero-left{align-self:stretch;display:flex;flex-direction:column;justify-content:space-between;gap:48px}
+.kicker{display:flex;gap:48px;font-size:13px;line-height:1.6;color:var(--muted);letter-spacing:.02em}
+.kicker span:first-child{font-family:var(--serif);font-size:20px;line-height:1.25;color:var(--ink)}
+.display{font-family:var(--serif);font-weight:400;font-size:clamp(84px,13.4vw,206px);line-height:.86;letter-spacing:-.025em}
+.display span,.display em{display:block}
+.display em{padding-left:.55em}
+.portrait{margin:0}
+.ph{aspect-ratio:4/5;background:linear-gradient(165deg,#d8d3c9,#8f897e);display:grid;place-items:center;text-align:center;color:rgba(255,255,255,.9);font-size:13px;letter-spacing:.06em;line-height:1.7}
+.portrait figcaption{display:flex;justify-content:space-between;font-size:12px;color:var(--muted);margin-top:10px;letter-spacing:.04em}
+.hero-zh{font-size:20px;font-weight:300;letter-spacing:.06em;margin-top:26px;line-height:1.5;white-space:nowrap}
+.hero-sub{font-size:14px;color:var(--muted);margin-top:8px;line-height:1.8}
+.hero-side .pill{margin-top:26px}
+.hero-stats{display:grid;grid-template-columns:repeat(3,1fr) 1.5fr;gap:24px;margin-top:80px;border-top:1px solid var(--ink);padding-top:20px}
+.hero-stats b{display:block;font-family:var(--serif);font-weight:400;font-size:clamp(52px,6.2vw,92px);line-height:.95}
+.hero-stats>div>span{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+.hero-cap{align-self:end;text-align:right;font-family:var(--serif);font-size:26px;line-height:1.25}
+.hero-cap a{display:inline-block;margin-top:10px;font-family:var(--sans);font-size:13px;border-bottom:1px solid currentColor;padding-bottom:1px}
+.keys-hint{display:flex;justify-content:space-between;font-size:12px;color:var(--muted);letter-spacing:.06em;margin-top:88px;margin-bottom:12px}
+.keys-hint em{font-family:var(--serif);font-size:16px;color:var(--ink)}
+.keys{display:block;width:100%;height:96px;cursor:pointer;user-select:none;-webkit-user-select:none;touch-action:manipulation;-webkit-tap-highlight-color:transparent;border-top:1px solid var(--ink);border-bottom:1px solid var(--ink)}
+.kw{fill:var(--bg);stroke:var(--ink);stroke-width:1;vector-effect:non-scaling-stroke;transition:fill .45s}
+.kb{fill:var(--ink);transition:fill .45s}
+.kw.on{fill:#d6d1c6;transition:none}
+.kb.on{fill:#5a5a5a;transition:none}
+
+/* ---------- 通用 ---------- */
+.sec{padding:144px 0}
+.sec-alt{background:var(--bg-2)}
+.dark{background:var(--night);color:var(--on-night)}
+.sh{display:flex;align-items:baseline;gap:14px;padding-bottom:14px;border-bottom:1px solid var(--line);margin-bottom:72px;font-size:13px;letter-spacing:.06em}
+.sh-n{color:var(--muted)}
+.sh-t{font-family:var(--serif);font-size:24px;letter-spacing:0;line-height:1}
+.sh-zh{margin-left:auto;color:var(--muted);letter-spacing:.24em}
+.dark .sh{border-color:var(--night-line)}
+.dark .sh-n,.dark .sh-zh{color:var(--on-night-muted)}
+.h-big{font-family:var(--serif);font-weight:400;font-size:clamp(52px,7.4vw,112px);line-height:.92;letter-spacing:-.02em}
+.h-zh{font-size:clamp(20px,2.2vw,26px);font-weight:300;letter-spacing:.08em;line-height:1.6}
+
+/* ---------- 01 About ---------- */
+.statement{font-size:clamp(24px,3.1vw,42px);font-weight:300;line-height:1.6;letter-spacing:.02em;max-width:23em}
+.statement em{font-family:var(--serif);font-size:1.18em;letter-spacing:0;line-height:1}
+.cols3{display:grid;grid-template-columns:repeat(3,1fr);gap:56px;margin-top:104px}
+.idx{font-family:var(--serif);font-style:italic;font-size:24px;color:var(--muted);line-height:1}
+.cols3 h3{font-size:19px;font-weight:500;margin:14px 0 8px;letter-spacing:.04em}
+.cols3 p{font-size:15px;color:var(--ink-2)}
+.creds{display:grid;grid-template-columns:repeat(3,1fr);gap:56px;margin-top:80px;padding-top:24px;border-top:1px solid var(--line)}
+.creds dt{font-size:12px;letter-spacing:.16em;color:var(--muted);margin-bottom:6px}
+.creds dd{font-size:15px}
+
+/* ---------- 02 Lessons ---------- */
+.split{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:end;margin-bottom:72px}
+.split p{font-size:16px;color:var(--ink-2);max-width:26em;justify-self:end}
+.rows{border-top:1px solid var(--ink)}
+.row{display:grid;grid-template-columns:96px 1fr 1.3fr 170px;gap:32px;padding:40px 0;border-bottom:1px solid var(--line);align-items:baseline;transition:padding .5s var(--ease)}
+.row:hover{padding-left:14px}
+.row-n{font-family:var(--serif);font-size:48px;line-height:1}
+.row h3{font-size:25px;font-weight:400;letter-spacing:.06em;line-height:1.3}
+.row h3 em{display:block;font-family:var(--serif);font-size:21px;color:var(--muted);letter-spacing:0;margin-top:4px}
+.row p{font-size:15px;color:var(--ink-2)}
+.row-m{display:flex;flex-direction:column;align-items:flex-end;gap:6px;font-size:13px;color:var(--muted)}
+.row-m b{font-family:var(--serif);font-weight:400;font-size:24px;color:var(--ink)}
+.note-line{margin-top:28px;font-size:14px;color:var(--muted)}
+
+/* ---------- 03 Online ---------- */
+.online-head{display:grid;grid-template-columns:1.15fr .85fr;gap:64px;align-items:end;margin-bottom:72px}
+.online-head .h-zh{margin-top:20px}
+.online-head p{font-size:16px;color:var(--on-night-2)}
+.call{background:#1b1b1b;border:1px solid var(--night-line);border-radius:14px;overflow:hidden;box-shadow:0 40px 100px rgba(0,0,0,.5)}
+.call-bar{display:flex;align-items:center;gap:14px;height:42px;padding:0 18px;border-bottom:1px solid var(--night-line);font-size:12px;letter-spacing:.04em;color:var(--on-night-muted)}
+.call-bar .dots{display:flex;gap:7px}
+.call-bar .dots i{width:10px;height:10px;border-radius:50%;background:#3a3a3a}
+.call-time{margin-left:auto;font-variant-numeric:tabular-nums}
+.call-time::before{content:"";display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--on-night);margin-right:8px;vertical-align:1px;animation:blink 2s infinite}
+@keyframes blink{50%{opacity:.25}}
+.call-body{display:grid;grid-template-columns:1.65fr 1fr;height:380px}
+.call-main{position:relative;background:radial-gradient(120% 90% at 50% 15%,#282828,#111);overflow:hidden}
+.call-main::after{content:"";position:absolute;left:0;right:0;bottom:55%;height:15%;background:linear-gradient(#0d0d0d,#1e1e1e)}
+.call-keys{position:absolute;left:0;bottom:0;width:100%;height:55%;display:block}
+.call-keys .kw{fill:#e6e3dc;stroke:#9c978d}
+.call-keys .kw.on{fill:#c3bfb6}
+.call-keys .kb{fill:#0d0d0d}
+.call-keys .kb.on{fill:#555}
+.cam-tag{position:absolute;left:14px;top:14px;z-index:2;font-size:12px;letter-spacing:.04em;background:rgba(0,0,0,.55);padding:4px 10px;border-radius:999px}
+.pip{position:absolute;right:14px;top:14px;z-index:2;width:132px;aspect-ratio:4/3;background:#2c2c2c;border:1px solid rgba(255,255,255,.2);border-radius:10px;display:grid;place-items:center}
+.pip span{width:44px;height:44px;border-radius:50%;border:1px solid rgba(255,255,255,.55);display:grid;place-items:center;font-family:var(--serif);font-size:22px}
+.pip small{position:absolute;left:9px;bottom:5px;font-size:11px;color:var(--on-night-2)}
+.call-side{border-left:1px solid var(--night-line);background:#161616;padding:18px;display:flex;flex-direction:column;gap:12px}
+.side-tag{font-size:12px;letter-spacing:.04em;color:var(--on-night-muted)}
+.score{width:100%;flex:1;min-height:0;color:var(--on-night)}
+.side-note{font-size:14px;font-weight:300;color:var(--on-night-2);border-left:1px solid var(--on-night);padding-left:12px;line-height:1.6}
+.call-tools{display:flex;justify-content:center;flex-wrap:wrap;gap:10px;padding:14px;border-top:1px solid var(--night-line)}
+.call-tools span{font-size:12px;color:var(--on-night-muted);border:1px solid var(--night-line);border-radius:999px;padding:5px 16px}
+.call-tools span.act{color:var(--on-night);border-color:rgba(243,241,236,.5)}
+.online-foot{display:grid;grid-template-columns:1fr 1fr;gap:96px;margin-top:104px;align-items:center}
+.steps li{display:grid;grid-template-columns:64px 1fr;gap:8px;padding:26px 0;border-bottom:1px solid var(--night-line)}
+.steps li:first-child{border-top:1px solid var(--night-line)}
+.steps .idx{color:var(--on-night-muted);font-size:28px}
+.steps h3{font-size:19px;font-weight:400;letter-spacing:.06em;margin-bottom:4px}
+.steps p{font-size:15px;color:var(--on-night-muted)}
+.note-fig{margin:0}
+.note-card{background:var(--bg);color:var(--ink);padding:32px 34px 26px;transform:rotate(-1.6deg);box-shadow:0 30px 80px rgba(0,0,0,.5)}
+.nc-head{display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px solid var(--ink);padding-bottom:12px;margin-bottom:18px}
+.nc-title{font-size:12px;letter-spacing:.2em}
+.nc-date{font-family:var(--serif);font-size:40px;line-height:.9}
+.nc-body p{font-size:15px;line-height:1.9;margin-bottom:10px}
+.nc-body b{display:inline-block;font-size:11px;font-weight:500;letter-spacing:.1em;margin-right:10px;padding:0 9px;border:1px solid var(--ink);border-radius:999px;line-height:1.8;vertical-align:1px}
+.note-fig figcaption{margin-top:26px;text-align:center;font-size:12px;letter-spacing:.12em;color:var(--on-night-muted)}
+
+/* ---------- 04 Student Z ---------- */
+.z-top{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:end}
+.z-title{font-family:var(--serif);font-weight:400;font-size:clamp(84px,12vw,184px);line-height:.84;letter-spacing:-.025em}
+.z-title em{padding-left:.4em}
+.z-meta{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:22px}
+.z-meta>span{font-size:12px;letter-spacing:.04em;border:1px solid var(--line);border-radius:999px;padding:4px 13px;color:var(--ink-2)}
+.z-intro{font-size:17px;font-weight:300;line-height:1.85;color:var(--ink-2)}
+.z-stats{display:grid;grid-template-columns:repeat(5,1fr);gap:0 24px;margin-top:88px;border-top:1px solid var(--ink)}
+.z-stats>div{padding-top:20px;display:flex;flex-direction:column-reverse;justify-content:flex-end;gap:6px}
+.z-stats dd{font-family:var(--serif);font-size:clamp(52px,6.2vw,92px);line-height:.95}
+.z-stats dt{font-size:12px;letter-spacing:.12em;color:var(--muted)}
+.block{margin-top:152px}
+.bh{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:end;margin-bottom:40px}
+.bh h3{font-family:var(--serif);font-weight:400;font-size:clamp(44px,5.4vw,72px);line-height:1;letter-spacing:-.015em}
+.bh h3 small{display:block;font-family:var(--sans);font-size:13px;letter-spacing:.24em;color:var(--muted);margin-bottom:14px}
+.bh p{font-size:14px;color:var(--muted);max-width:27em;justify-self:end;text-align:right}
+
+.staff-box{width:100%;min-height:140px}
+.staff-box svg{display:block}
+.bar{stroke:var(--ink);stroke-width:1.1}
+.reh rect{fill:var(--bg);stroke:var(--ink);stroke-width:1}
+.reh text{font-family:var(--serif);font-size:15px;fill:var(--ink)}
+.head{fill:var(--ink)}
+.head.hollow{fill:var(--bg);stroke:var(--ink);stroke-width:1.6}
+.stem{stroke:var(--ink);stroke-width:1.3}
+.ledger{stroke:var(--ink);stroke-width:1}
+.hit{fill:transparent}
+.halo{fill:rgba(17,17,17,.08)}
+.note{cursor:pointer;outline:none}
+.note:hover .hit{fill:rgba(17,17,17,.035)}
+.note:focus-visible .hit{fill:rgba(17,17,17,.05);stroke:var(--ink);stroke-dasharray:2 3}
+.st-date,.st-month{font-family:var(--sans);font-size:12px;fill:var(--muted);font-variant-numeric:tabular-nums}
+.st-date.on{fill:var(--ink);font-weight:500}
+.st-month{font-size:11px}
+.staff-legend{display:flex;flex-wrap:wrap;gap:8px 28px;margin-top:18px;font-size:12px;letter-spacing:.04em;color:var(--muted)}
+.staff-legend span{display:inline-flex;align-items:center;gap:8px}
+.lg-fill,.lg-hollow{width:12px;height:9px;border-radius:50%;transform:rotate(-20deg);display:inline-block}
+.lg-fill{background:var(--ink)}
+.lg-hollow{border:1.5px solid var(--ink)}
+.lg-box{border:1px solid var(--ink);font-family:var(--serif);font-size:14px;line-height:1;padding:2px 5px;color:var(--ink)}
+
+.lesson{display:grid;grid-template-columns:240px 1fr 1fr;gap:56px;margin-top:48px;padding-top:32px;border-top:1px solid var(--ink)}
+.l-date{font-family:var(--serif);font-size:88px;line-height:.82;display:block}
+.l-tags{display:block;font-size:12px;letter-spacing:.1em;color:var(--muted);margin-top:14px}
+.l-nav{display:flex;gap:8px;margin-top:20px}
+.l-nav button{width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:transparent;cursor:pointer;font-family:var(--serif);font-size:22px;line-height:1;transition:border-color .3s,background .3s}
+.l-nav button:hover:not(:disabled){border-color:var(--ink)}
+.l-nav button:disabled{opacity:.3;cursor:default}
+.lesson h4{font-size:12px;font-weight:400;letter-spacing:.18em;color:var(--muted);margin-bottom:16px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chips li{border:1px solid var(--ink);border-radius:999px;padding:3px 14px;font-size:14px;line-height:1.75}
+.hw li{display:flex;justify-content:space-between;align-items:baseline;gap:12px;padding:10px 0;border-bottom:1px solid var(--line);font-size:15px;line-height:1.6}
+.hw li:first-child{padding-top:0}
+.hw small{font-size:12px;color:var(--muted);text-align:right}
+.empty{color:var(--muted);font-size:15px}
+
+.programme{columns:3 260px;column-gap:64px}
+.pg{break-inside:avoid;margin-bottom:48px}
+.pg h4{display:flex;align-items:baseline;justify-content:space-between;border-bottom:1px solid var(--ink);padding-bottom:8px}
+.pg h4 em{font-family:var(--serif);font-size:32px;font-weight:400;line-height:1}
+.pg h4 span{font-size:12px;letter-spacing:.2em;color:var(--muted);font-weight:400}
+.pg li{display:flex;justify-content:space-between;align-items:baseline;gap:12px;padding:10px 0;border-bottom:1px solid var(--line);font-size:16px}
+.pg .pd{font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums}
+.pg .now{font-size:11px;letter-spacing:.08em;background:var(--ink);color:var(--bg);border-radius:999px;padding:1px 10px;white-space:nowrap}
+
+.kmap{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--ink)}
+.kc{padding:28px 32px 40px 0;border-bottom:1px solid var(--line)}
+.kc:not(:nth-child(3n+1)){padding-left:32px;border-left:1px solid var(--line)}
+.kc-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:18px}
+.kc-head h4{font-size:17px;font-weight:400;letter-spacing:.06em}
+.kc-n{font-family:var(--serif);font-style:italic;font-size:52px;line-height:.9}
+.kchips{display:flex;flex-wrap:wrap;gap:7px 8px}
+.kchips li{font-size:13px;padding:2px 12px;border:1px solid var(--line);border-radius:999px;color:var(--ink-2)}
+
+/* ---------- 05 FAQ ---------- */
+.faq-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:96px}
+.faq-grid .h-zh{margin-top:20px}
+.faq details{border-bottom:1px solid var(--line);padding:24px 0}
+.faq details:first-child{border-top:1px solid var(--ink)}
+.faq summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:20px;font-size:18px;letter-spacing:.03em}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";font-family:var(--serif);font-size:34px;line-height:1;transition:transform .4s var(--ease);flex:none}
+.faq details[open] summary::after{transform:rotate(45deg)}
+.faq details p{margin-top:12px;color:var(--ink-2);font-size:15px;font-weight:300;max-width:34em}
+
+/* ---------- 06 Contact ---------- */
+#contact{padding-bottom:0}
+.cta-big{font-family:var(--serif);font-weight:400;font-size:clamp(88px,17vw,268px);line-height:.84;letter-spacing:-.03em}
+.cta-big em{padding-left:.3em}
+.contact-grid{display:grid;grid-template-columns:1.1fr 1fr 240px;gap:56px;margin-top:88px;padding-top:28px;border-top:1px solid var(--night-line);align-items:start}
+.contact-grid .h-zh{margin-bottom:28px}
+.contact-grid dt{font-size:12px;letter-spacing:.16em;color:var(--on-night-muted);margin-bottom:2px}
+.contact-grid dd{font-size:17px;margin-bottom:22px}
+.qr{background:var(--on-night);color:var(--muted);padding:14px;text-align:center;font-size:12px;letter-spacing:.06em}
+.qr-in{aspect-ratio:1;border:1px dashed rgba(17,17,17,.3);display:grid;place-items:center;margin-bottom:10px}
+.foot{display:flex;justify-content:space-between;align-items:baseline;gap:16px;margin-top:128px;padding:28px 0 40px;border-top:1px solid var(--night-line);font-size:12px;letter-spacing:.06em;color:var(--on-night-muted)}
+.foot em{font-family:var(--serif);font-size:20px;color:var(--on-night);letter-spacing:0}
+
+.mbar{display:none}
+.toast{position:fixed;left:50%;bottom:100px;transform:translate(-50%,12px);background:var(--ink);color:var(--bg);font-size:14px;padding:12px 20px;border-radius:999px;opacity:0;pointer-events:none;transition:opacity .3s,transform .3s;z-index:40;max-width:calc(100% - 32px);text-align:center}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+.dark ~ .toast{background:var(--on-night);color:var(--ink)}
+
+@media (max-width:1040px){
+  .wrap{padding:0 28px}
+  .nav{gap:22px}
+  .hero-grid{grid-template-columns:1fr 260px;gap:40px}
+  .ph{aspect-ratio:1/1}
+  .row{grid-template-columns:72px 1fr 1fr;gap:24px}
+  .row-m{grid-column:2/-1;flex-direction:row;align-items:baseline;gap:16px}
+  .kmap{grid-template-columns:repeat(2,1fr)}
+  .kc,.kc:not(:nth-child(3n+1)){padding:28px 0 36px;border-left:0}
+  .kc:nth-child(even){padding-left:28px;border-left:1px solid var(--line)}
+  .kc:nth-child(odd){padding-right:28px}
+  .lesson{grid-template-columns:1fr 1fr}
+  .l-when{grid-column:1/-1;display:flex;align-items:flex-end;flex-wrap:wrap;gap:10px 20px}
+  .l-tags{margin:0 0 6px}
+  .l-nav{margin:0 0 0 auto}
+  .contact-grid{grid-template-columns:1fr 1fr;gap:40px}
+  .qr{max-width:220px}
+}
+@media (max-width:860px){
+  .nav{display:none}
+  .top-in{justify-content:space-between}
+}
+@media (max-width:760px){
+  .wrap{padding:0 16px}
+  .top-in{height:62px}
+  .logo{font-size:24px}
+  .logo small{display:none}
+  .hero{padding-top:36px}
+  .hero-grid{grid-template-columns:1fr;gap:40px}
+  .hero-left{gap:40px}
+  .kicker{gap:24px}
+  .kicker span:first-child{font-size:18px}
+  .portrait{max-width:260px}
+  .hero-zh{font-size:20px;margin-top:22px}
+  .hero-stats{grid-template-columns:repeat(3,1fr);margin-top:56px;gap:12px}
+  .hero-cap{grid-column:1/-1;text-align:left;font-size:22px;margin-top:8px}
+  .keys-hint{margin-top:64px}
+  .keys{height:72px}
+  .sec{padding:96px 0}
+  .sh{margin-bottom:48px}
+  .cols3,.creds{grid-template-columns:1fr;gap:36px;margin-top:64px}
+  .creds{gap:18px;margin-top:48px}
+  .split,.online-head,.z-top,.bh,.faq-grid{grid-template-columns:1fr;gap:24px}
+  .split{margin-bottom:48px}
+  .split p,.bh p{justify-self:start;text-align:left}
+  .row{grid-template-columns:48px 1fr;gap:6px 16px;padding:30px 0}
+  .row:hover{padding-left:0}
+  .row-n{font-size:36px}
+  .row h3{font-size:22px}
+  .row p,.row-m{grid-column:2}
+  .row p{margin-top:6px}
+  .online-head{margin-bottom:48px}
+  .call-body{grid-template-columns:1fr;height:auto}
+  .call-main{height:230px}
+  .call-side{border-left:0;border-top:1px solid var(--night-line)}
+  .pip{width:84px;aspect-ratio:1}
+  .pip span{width:34px;height:34px;font-size:18px;margin-top:-12px}
+  .online-foot{grid-template-columns:1fr;gap:56px;margin-top:72px}
+  .note-card{padding:24px 20px 20px}
+  .z-meta{margin-bottom:16px}
+  .z-intro{font-size:16px}
+  .z-stats{grid-template-columns:repeat(3,1fr);gap:20px 12px;margin-top:56px}
+  .block{margin-top:104px}
+  .bh{margin-bottom:28px}
+  .lesson{grid-template-columns:1fr;gap:32px;margin-top:36px}
+  .l-date{font-size:68px}
+  .kmap{grid-template-columns:1fr}
+  .kc,.kc:nth-child(even),.kc:nth-child(odd){padding:26px 0 30px;border-left:0}
+  .faq-grid{gap:36px}
+  .contact-grid{grid-template-columns:1fr;gap:12px;margin-top:56px}
+  .qr{justify-self:start;margin-top:16px}
+  .foot{flex-direction:column;gap:4px;margin-top:88px}
+  .mbar{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:30;padding:10px 16px calc(10px + env(safe-area-inset-bottom));background:rgba(243,241,236,.9);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border-top:1px solid var(--line)}
+  .mbar .pill{width:100%}
+  body{padding-bottom:76px}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *{transition:none!important;animation:none!important}
+  .js .reveal{opacity:1;transform:none}
+}
+</style>
+<script>document.documentElement.classList.add('js');</script>
+</head>
+<body>
+
+<header class="top" id="top">
+  <div class="wrap top-in">
+    <a class="logo" href="#">Studio Tan<small>谭老师钢琴课</small></a>
+    <nav class="nav" aria-label="页面导航">
+      <a href="#about">About</a>
+      <a href="#lessons">Lessons</a>
+      <a href="#online">Online</a>
+      <a href="#student">Student Z</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+    <a class="pill pill-sm" href="#contact">预约试听 →</a>
+  </div>
+</header>
+
+<main>
+<!-- ================= Hero ================= -->
+<section class="hero">
+  <div class="wrap">
+    <div class="hero-grid">
+      <div class="hero-left">
+        <p class="kicker"><span>One-to-one piano lessons,<br>online &amp; in person.</span><span>一对一钢琴课<br>线上 / 线下</span></p>
+        <h1 class="display" aria-label="Play it slowly · 慢慢弹"><span>Play it</span><em>slowly.</em></h1>
+      </div>
+      <aside class="hero-side">
+        <figure class="portrait">
+          <div class="ph">老师照片<br>建议黑白，竖版 4:5</div>
+          <figcaption><span>(01) Portrait</span><span>谭老师</span></figcaption>
+        </figure>
+        <p class="hero-zh">慢慢弹，也能弹得很美。</p>
+        <p class="hero-sub">一对一钢琴课 · 线上腾讯会议 / 线下 XXX<br>成人零基础、孩子启蒙都可以。</p>
+        <a class="pill" href="#contact">预约试听 →</a>
+      </aside>
+    </div>
+    <div class="hero-stats">
+      <div><b data-stat="lessons"></b><span>Lessons</span></div>
+      <div><b data-stat="weeks"></b><span>Weeks</span></div>
+      <div><b data-stat="pieces"></b><span>Pieces</span></div>
+      <p class="hero-cap"><em>Student Z,</em> from zero,<br>since <span data-stat="sinceEn"></span>.<br><a href="#student">看完整学习记录 →</a></p>
+    </div>
+    <p class="keys-hint"><span><em>Try it</em> — 点一下琴键</span><span>Studio Tan, 2026</span></p>
+  </div>
+  <svg id="heroKeys" class="keys" preserveAspectRatio="none" role="img" aria-label="可以点击试弹的钢琴键盘"></svg>
+</section>
+
+<!-- ================= 01 About ================= -->
+<section class="sec" id="about">
+  <div class="wrap">
+    <div class="sh"><span class="sh-n">(01)</span><span class="sh-t">About</span><span class="sh-zh">关于我</span></div>
+    <p class="statement reveal">我是谭老师。我相信钢琴可以 <em>slowly</em> 学——先把坐姿、手形和触键打对，乐理和曲子一起推进，每节课都留下一份笔记。</p>
+    <div class="cols3">
+      <div class="reveal"><span class="idx">a.</span><h3>先把基础打对</h3><p>坐姿、手形、连奏与断奏，第一节课就从这里开始。</p></div>
+      <div class="reveal"><span class="idx">b.</span><h3>乐理和曲子一起学</h3><p>和弦、调号、力度记号，学完马上在当周的曲子里弹出来。</p></div>
+      <div class="reveal"><span class="idx">c.</span><h3>每节课都有笔记</h3><p>知识点与作业课后整理成文，学到哪里一目了然。</p></div>
+    </div>
+    <!-- ✏️ 把虚线部分换成真实信息 -->
+    <dl class="creds">
+      <div><dt>EDUCATION 学历</dt><dd><span class="todo">毕业院校 · 专业</span></dd></div>
+      <div><dt>TEACHING 教龄</dt><dd><span class="todo">X 年</span></dd></div>
+      <div><dt>CERTIFICATE 证书</dt><dd><span class="todo">待填写，没有可删除</span></dd></div>
+    </dl>
+  </div>
+</section>
+
+<!-- ================= 02 Lessons ================= -->
+<section class="sec sec-alt" id="lessons">
+  <div class="wrap">
+    <div class="sh"><span class="sh-n">(02)</span><span class="sh-t">Lessons</span><span class="sh-zh">课程</span></div>
+    <div class="split">
+      <h2 class="h-big reveal">One to one,<br><em>your pace.</em></h2>
+      <p>全部为一对一授课，线上线下都可以。不确定适合哪种，先上一节试听课，我帮你判断。</p>
+    </div>
+    <div class="rows">
+      <article class="row">
+        <span class="row-n">01</span>
+        <h3>成人零基础<em>Adult beginners</em></h3>
+        <p>教材使用《塞巴斯蒂安成人钢琴教程》。从认识键盘开始，乐理、读谱与曲目同步推进。</p>
+        <div class="row-m"><span>线上 / 线下</span><b class="todo">¥ — / 节</b></div>
+      </article>
+      <article class="row">
+        <span class="row-n">02</span>
+        <h3>儿童启蒙<em>Kids</em></h3>
+        <p>从节奏、听音和正确的手形开始，先让孩子喜欢上坐在琴前。</p>
+        <div class="row-m"><span>线下为主</span><b class="todo">¥ — / 节</b></div>
+      </article>
+      <article class="row">
+        <span class="row-n">03</span>
+        <h3>兴趣曲目<em>Repertoire</em></h3>
+        <p>有一定基础，想弹自己喜欢的曲子，或者系统地再往上走一个台阶。</p>
+        <div class="row-m"><span>线上 / 线下</span><b class="todo">¥ — / 节</b></div>
+      </article>
+    </div>
+    <p class="note-line">可以先上一节试听课，再决定是否继续。</p>
+  </div>
+</section>
+
+<!-- ================= 03 Online ================= -->
+<section class="sec dark" id="online">
+  <div class="wrap">
+    <div class="sh"><span class="sh-n">(03)</span><span class="sh-t">Online</span><span class="sh-zh">线上课堂</span></div>
+    <div class="online-head">
+      <div class="reveal">
+        <h2 class="h-big">Across the screen,<br><em>still one to one.</em></h2>
+        <p class="h-zh">隔着屏幕，也是一对一。</p>
+      </div>
+      <p>线上课通过腾讯会议进行。你在自己的琴前，我在屏幕另一边，看你的手形、听你的声音，一起对着同一份乐谱讲解。</p>
+    </div>
+
+    <div class="call reveal" aria-hidden="true">
+      <div class="call-bar"><span class="dots"><i></i><i></i><i></i></span><span>Studio Tan · 一对一钢琴课</span><span class="call-time">00:32:15</span></div>
+      <div class="call-body">
+        <div class="call-main">
+          <span class="cam-tag">学员机位 · 俯拍琴键</span>
+          <div class="pip"><span>T</span><small>谭老师</small></div>
+          <svg id="callKeys" class="call-keys" preserveAspectRatio="none"></svg>
+        </div>
+        <div class="call-side">
+          <span class="side-tag">共享乐谱</span>
+          <svg id="score" class="score" viewBox="0 0 220 150" preserveAspectRatio="xMidYMid meet"></svg>
+          <p class="side-note">“这里是 mf，左手再轻一点。”</p>
+        </div>
+      </div>
+      <div class="call-tools"><span>麦克风</span><span>摄像头</span><span class="act">共享屏幕</span></div>
+    </div>
+
+    <div class="online-foot">
+      <ol class="steps">
+        <li><span class="idx">i.</span><div><h3>进入腾讯会议</h3><p>电脑、平板或手机都可以，课前发会议号。</p></div></li>
+        <li><span class="idx">ii.</span><div><h3>架好一个机位</h3><p>手机支架从侧上方拍到双手和琴键，我能看清手形和指法。</p></div></li>
+        <li><span class="idx">iii.</span><div><h3>课后收到笔记</h3><p>当堂知识点和作业整理好发给你，就像旁边这一份。</p></div></li>
+      </ol>
+      <figure class="note-fig reveal">
+        <div class="note-card">
+          <div class="nc-head"><span class="nc-title">LESSON NOTES</span><span class="nc-date">10.25</span></div>
+          <div class="nc-body">
+            <p><b>作业</b>《安静小宝贝》《天上的星星》</p>
+            <p><b>第 5 单元</b>G 大调：调号 1 个升号 F♯，所有的 F 都弹 F♯。音阶 G A B C D E F♯ G</p>
+            <p><b>和弦</b>主和弦 G：G-B-D（1 级）<br>下属和弦 C：C-E-G（4 级）<br>属七和弦 D7：D-F♯-A-C（5 级）</p>
+            <p><b>根音</b>和弦建立的那个音。原位弹时，根音在最下面。</p>
+          </div>
+        </div>
+        <figcaption>学员 Z 的课后笔记（节选）</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 04 Student Z ================= -->
+<section class="sec" id="student">
+  <div class="wrap">
+    <div class="sh"><span class="sh-n">(04)</span><span class="sh-t">Student Z</span><span class="sh-zh">学员档案</span></div>
+    <div class="z-top">
+      <h2 class="z-title reveal">Student<br><em>Z.</em></h2>
+      <div>
+        <p class="z-meta"><span>成人零基础</span><span>线上 · 腾讯会议</span><span>《塞巴斯蒂安成人钢琴教程》</span><span><span data-stat="since"></span> 起</span></p>
+        <p class="z-intro">以下内容全部整理自 Z 的课堂笔记。从第一节课的坐姿和手形，到现在练《爱乐之城》，每一步都有记录。</p>
+      </div>
+    </div>
+
+    <dl class="z-stats" id="zStats"></dl>
+
+    <div class="block">
+      <div class="bh">
+        <h3 class="reveal"><small>成长旋律</small>Growth, <em>in melody.</em></h3>
+        <p>每个音符是一节课。音越高，累计学过的知识点和曲目越多。点一下音符，看看那节课学了什么。</p>
+      </div>
+      <div class="staff-box" id="staff"></div>
+      <div class="staff-legend">
+        <span><i class="lg-fill"></i>新课</span>
+        <span><i class="lg-hollow"></i>复习课</span>
+        <span><i class="lg-box">3</i>进入教材第 3 单元</span>
+      </div>
+      <div class="lesson" id="lesson" aria-live="polite"></div>
+    </div>
+
+    <div class="block">
+      <div class="bh">
+        <h3 class="reveal"><small>曲目单</small>The <em>programme.</em></h3>
+        <p>按第一次布置的时间排列，均为教材中的改编版本。</p>
+      </div>
+      <div class="programme" id="programme"></div>
+    </div>
+
+    <div class="block">
+      <div class="bh">
+        <h3 class="reveal"><small>知识地图</small>Theory &amp; <em>technique.</em></h3>
+        <p>学过的乐理与技巧，按类别整理。</p>
+      </div>
+      <div class="kmap" id="kmap"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 05 FAQ ================= -->
+<section class="sec sec-alt" id="faq">
+  <div class="wrap">
+    <div class="sh"><span class="sh-n">(05)</span><span class="sh-t">FAQ</span><span class="sh-zh">常见问题</span></div>
+    <div class="faq-grid">
+      <div class="reveal">
+        <h2 class="h-big">Before you<br><em>begin.</em></h2>
+        <p class="h-zh">开始之前，你可能想知道。</p>
+      </div>
+      <div class="faq">
+        <details>
+          <summary>成年人零基础，现在开始晚吗？</summary>
+          <p>不晚。学员 Z 就是成人零基础，<span data-stat="weeks"></span> 周学到了教材第 <span data-stat="unit"></span> 单元，现在正在练《爱乐之城》的改编版。成年人理解力好，乐理往往学得比孩子快。</p>
+        </details>
+        <details>
+          <summary>线上课需要准备什么？</summary>
+          <p>一台钢琴或 88 键电钢琴；一台电脑、平板或手机，装好腾讯会议；再加一个手机支架，从侧上方拍到双手和琴键。上课前我会发会议号。</p>
+        </details>
+        <details>
+          <summary>用什么教材？</summary>
+          <p>成人学员使用《塞巴斯蒂安成人钢琴教程》，每个单元把乐理、技巧和曲目放在一起学。孩子会根据年龄另选合适的教材。</p>
+        </details>
+        <details>
+          <summary>怎么知道自己有没有进步？</summary>
+          <p>每节课后我会整理当堂笔记和作业。这一页上学员 Z 的成长记录，就是从这些笔记里整理出来的。</p>
+        </details>
+        <details>
+          <summary>家里还没有琴，可以先上课吗？</summary>
+          <p>可以先用 88 键电钢琴练习，确定想长期学了再考虑买钢琴。</p>
+        </details>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 06 Contact ================= -->
+<section class="sec dark" id="contact">
+  <div class="wrap">
+    <div class="sh"><span class="sh-n">(06)</span><span class="sh-t">Contact</span><span class="sh-zh">预约试听</span></div>
+    <h2 class="cta-big reveal">Let’s<br><em>play.</em></h2>
+    <div class="contact-grid">
+      <div>
+        <p class="h-zh">先来上一节试听课吧。<br>我会先了解你的基础和想弹的曲子，再给出学习建议。</p>
+        <button class="pill pill-light" type="button" data-copy="你的微信号">复制微信号 →</button>
+      </div>
+      <!-- ✏️ 换成真实微信号；两个复制按钮的 data-copy 也要一起改 -->
+      <dl>
+        <dt>TEACHER</dt><dd>谭老师</dd>
+        <dt>WECHAT</dt><dd><span class="todo">你的微信号</span></dd>
+        <dt>ONLINE</dt><dd>腾讯会议，一对一</dd>
+        <dt>OFFLINE</dt><dd>XXX</dd>
+      </dl>
+      <div class="qr"><div class="qr-in">微信二维码</div>扫码添加谭老师</div>
+    </div>
+    <footer class="foot"><em>Studio Tan</em><span>© 2026 谭老师钢琴课 · Play it slowly.</span></footer>
+  </div>
+</section>
+</main>
+
+<div class="mbar"><button class="pill" type="button" data-copy="你的微信号">加微信 · 预约试听 →</button></div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+/* =====================================================================
+   学员 Z 的课堂记录 —— 每上完一节课，在下面加一条即可，页面上的
+   统计数字、成长旋律、曲目单、知识地图都会自动更新。
+   topics：[类别, 内容]，类别见 CATS
+   pieces：作业曲目，可写成 '曲名|备注'
+   tasks ：其他作业（练习、页码等）
+   unit  ：这节课进入的教材单元（没有就不写）
+   review：复习课写 true
+   ===================================================================== */
+var CATS = { tech:'演奏与触键', read:'读谱', rhythm:'节奏与拍号', harmony:'音程与和声', key:'调性与音阶', expr:'表情与术语' };
+var LESSONS = [
+  { date:'2026-06-21',
+    topics:[['tech','坐姿与手形'],['tech','连奏 legato'],['tech','非连奏 non-legato'],['tech','断奏 staccato'],['read','音名与唱名'],['rhythm','四分音符 · 二分音符']] },
+  { date:'2026-06-28',
+    topics:[['rhythm','全音符'],['harmony','和弦 · C 大三和弦'],['harmony','分解和弦'],['rhythm','附点二分音符'],['read','五线谱的线与间'],['read','高音谱号'],['read','低音谱号'],['rhythm','拍号'],['rhythm','休止符']] },
+  { date:'2026-07-05',
+    topics:[['harmony','音程'],['expr','力度记号 p · mp · mf · f'],['expr','延音线']],
+    tasks:['教材第 24 页之前'] },
+  { date:'2026-07-12',
+    topics:[['harmony','四度、五度旋律音程'],['expr','连音线 slur'],['rhythm','3/4 拍']],
+    tasks:['第 3 单元之前的内容','第 3 页两个基本练习'] },
+  { date:'2026-07-19', unit:3,   /* 笔记里这一节没写日期，按顺序放在 7.19，请确认 */
+    topics:[['key','音级 I – VII'],['harmony','主 · 下属 · 属（T · S · D）'],['harmony','G7 属七和弦'],['key','F · G · A 大调的调号']],
+    pieces:['遥远的钟声','晚安女士','散步','内蒙民歌'], tasks:['和弦练习','钢琴基本第 4 页'] },
+  { date:'2026-07-26',
+    topics:[['rhythm','弱起'],['harmony','下属和弦 F-A-C'],['expr','延长记号']],
+    pieces:['简单的礼物','来这里吧','号角声声','他是快乐的好小伙'] },
+  { date:'2026-08-01',
+    topics:[['key','降号 ♭'],['key','还原记号 ♮'],['expr','dim. 渐弱'],['expr','rit. 渐慢']],
+    pieces:['他是快乐的好小伙','胜者行进','波斯市场','故乡的味道'] },
+  { date:'2026-08-09',
+    topics:[['expr','速度标记 Largo → Prestissimo'],['key','升号 ♯'],['key','12 个大调音阶'],['key','升降号的顺序']],
+    pieces:['胜者行进|注意力度、乐句','波斯市场|注意力度、乐句','杨基歌|注意速度','走下山谷|用不同的速度弹','康康舞','即兴幻想'] },
+  { date:'2026-08-30',
+    topics:[['tech','断奏记号：时值减半']],
+    pieces:['惊愕交响曲','跳动和滑行','左手华尔兹'] },
+  { date:'2026-09-06', unit:5,
+    topics:[['key','G 大调 · F♯'],['rhythm','4/2 拍']],
+    pieces:['左手华尔兹|速度练习','晨号','风鸣琴','中提琴圆舞曲'] },
+  { date:'2026-10-11', review:true },
+  { date:'2026-10-18', review:true },
+  { date:'2026-10-25',
+    topics:[['harmony','G 大调三个基本和弦'],['harmony','属七和弦 D7'],['harmony','根音']],
+    pieces:['安静小宝贝','天上的星星'] },
+  { date:'2026-11-01', unit:6,
+    topics:[['rhythm','八分音符']],
+    pieces:['春','王宫','巴黎街景'] },
+  { date:'2026-11-08',
+    pieces:['天使在唱歌','奏鸣曲主题','爱乐之城'] }
+];
+
+/* ---------- 整理数据 ---------- */
+var $ = function(s){ return document.querySelector(s); };
+var MONTH_EN = ['','January','February','March','April','May','June','July','August','September','October','November','December'];
+var MONTH_CN = ['','一月','二月','三月','四月','五月','六月','七月','八月','九月','十月','十一月','十二月'];
+function md(d){ return +d.slice(5,7) + '.' + +d.slice(8,10); }
+function md2(d){ return d.slice(5,7) + '.' + d.slice(8,10); }
+function pname(p){ return p.split('|')[0]; }
+var seenPieces = {}, pieceCount = 0;
+LESSONS.forEach(function(L){
+  L.topics = L.topics || []; L.pieces = L.pieces || []; L.tasks = L.tasks || [];
+  L.newPieces = [];
+  L.pieces.forEach(function(p){ var n = pname(p); if (!seenPieces[n]) { seenPieces[n] = 1; pieceCount++; L.newPieces.push(n); } });
+});
+var FIRST = LESSONS[0], LAST = LESSONS[LESSONS.length - 1];
+var STATS = {
+  lessons: LESSONS.length,
+  weeks: Math.round((new Date(LAST.date) - new Date(FIRST.date)) / 6048e5),
+  unit: Math.max.apply(null, LESSONS.map(function(L){ return L.unit || 0; })),
+  pieces: pieceCount,
+  topics: LESSONS.reduce(function(a, L){ return a + L.topics.length; }, 0),
+  since: FIRST.date.slice(0,4) + '.' + FIRST.date.slice(5,7),
+  sinceEn: MONTH_EN[+FIRST.date.slice(5,7)] + ' ' + FIRST.date.slice(0,4)
+};
+document.querySelectorAll('[data-stat]').forEach(function(el){ el.textContent = STATS[el.dataset.stat]; });
+$('#zStats').innerHTML = [['lessons','节课 · Lessons'],['weeks','周 · Weeks'],['unit','单元 · Unit'],['pieces','首曲目 · Pieces'],['topics','个知识点 · Topics']]
+  .map(function(s){ return '<div><dt>' + s[1] + '</dt><dd>' + STATS[s[0]] + '</dd></div>'; }).join('');
+
+/* ---------- 钢琴键盘 ---------- */
+function buildKeyboard(svg, from, to, opt){
+  var BLACK = [1,3,6,8,10], wi = 0, whites = '', blacks = '';
+  var ww = opt.ww, h = opt.h, bw = ww * .6, bh = h * .62, pressed = opt.pressed || [];
+  for (var m = from; m <= to; m++) {
+    var on = pressed.indexOf(m) > -1 ? ' on' : '';
+    if (BLACK.indexOf(m % 12) > -1) blacks += '<rect class="kb' + on + '" data-m="' + m + '" x="' + (wi*ww - bw/2) + '" y="0" width="' + bw + '" height="' + bh + '"/>';
+    else { whites += '<rect class="kw' + on + '" data-m="' + m + '" x="' + (wi*ww) + '" y="0" width="' + ww + '" height="' + h + '"/>'; wi++; }
+  }
+  svg.setAttribute('viewBox', '0 0 ' + (wi*ww) + ' ' + h);
+  svg.innerHTML = whites + blacks;
+}
+(function(){                                   /* 大屏完整 88 键，手机上只显示中间三个八度 */
+  var cur = '';
+  function fit(){
+    var w = window.innerWidth, r = w < 560 ? [48,84] : w < 1000 ? [36,96] : [21,108];
+    if (r.join() !== cur) { cur = r.join(); buildKeyboard($('#heroKeys'), r[0], r[1], { ww:20, h:120 }); }
+  }
+  fit(); window.addEventListener('resize', fit);
+})();
+buildKeyboard($('#callKeys'), 48, 71, { ww:20, h:100, pressed:[48,52,55,60,64,67] });
+
+var actx = null;
+function play(m){
+  try {
+    actx = actx || new (window.AudioContext || window.webkitAudioContext)();
+    if (actx.state === 'suspended') actx.resume();
+    var f = 440 * Math.pow(2, (m - 69) / 12), t = actx.currentTime;
+    var out = actx.createGain(), lp = actx.createBiquadFilter();
+    lp.type = 'lowpass'; lp.frequency.value = Math.min(9000, f * 7);
+    out.gain.setValueAtTime(0, t);
+    out.gain.linearRampToValueAtTime(.2, t + .008);
+    out.gain.exponentialRampToValueAtTime(.0008, t + 2.2);
+    [[1,1],[2,.38],[3,.14],[4,.06]].forEach(function(hp){
+      var o = actx.createOscillator(), g = actx.createGain();
+      o.type = 'sine'; o.frequency.value = f * hp[0]; g.gain.value = hp[1];
+      o.connect(g); g.connect(lp); o.start(t); o.stop(t + 2.3);
+    });
+    lp.connect(out); out.connect(actx.destination);
+  } catch (e) {}
+}
+(function(){
+  var svg = $('#heroKeys'), type = 'mouse';
+  function hit(e){
+    var r = e.target.closest && e.target.closest('rect[data-m]'); if (!r) return;
+    play(+r.dataset.m); r.classList.add('on');
+    setTimeout(function(){ r.classList.remove('on'); }, 200);
+  }
+  svg.addEventListener('pointerdown', function(e){ type = e.pointerType; if (type === 'mouse') hit(e); });
+  svg.addEventListener('pointerover', function(e){ if (e.pointerType === 'mouse' && e.buttons === 1) hit(e); });
+  svg.addEventListener('click', function(e){ if (type !== 'mouse') hit(e); });
+})();
+
+/* ---------- 线上课堂里的小乐谱 ---------- */
+(function(){
+  var o = '';
+  function system(y0, ks){
+    for (var j = 0; j < 5; j++) o += '<line x1="6" y1="' + (y0 + j*8) + '" x2="214" y2="' + (y0 + j*8) + '" stroke="currentColor" stroke-opacity=".45" stroke-width=".8"/>';
+    o += '<line x1="112" y1="' + y0 + '" x2="112" y2="' + (y0 + 32) + '" stroke="currentColor" stroke-opacity=".6" stroke-width=".8"/>';
+    ks.forEach(function(k, i){
+      var x = 26 + i*24 + (i > 3 ? 6 : 0), y = y0 + 32 - k*4, up = k < 4, sx = up ? x + 4 : x - 4;
+      o += '<ellipse cx="' + x + '" cy="' + y + '" rx="4.6" ry="3.3" fill="currentColor" transform="rotate(-20 ' + x + ' ' + y + ')"/>';
+      o += '<line x1="' + sx + '" y1="' + y + '" x2="' + sx + '" y2="' + (up ? y - 25 : y + 25) + '" stroke="currentColor" stroke-width=".9"/>';
+    });
+  }
+  system(22, [2,3,4,4,5,6,5,4]);
+  system(94, [4,3,2,3,4,4,3,2]);
+  o += '<ellipse cx="140" cy="109" rx="24" ry="11" fill="none" stroke="currentColor" stroke-width="1.4" transform="rotate(-6 140 109)"/>';
+  o += '<text x="8" y="80" font-family="Instrument Serif, Georgia, serif" font-style="italic" font-size="19" fill="currentColor">mf</text>';
+  $('#score').innerHTML = o;
+})();
+
+/* ---------- 成长旋律（五线谱） ---------- */
+var sel = LESSONS.length - 1;
+function renderStaff(focus){
+  var box = $('#staff'), W = Math.round(box.clientWidth) || 320, narrow = W < 640;
+  var s = narrow ? 11 : 14, rx = s * .62, ry = s * .44;
+  var padL = 2, padR = narrow ? 26 : 56, x0 = padL + (narrow ? 20 : 34);
+  var yb = Math.round(8.6 * s);
+  var H = Math.round(yb + 4.2 * s + (narrow ? 14 : 0));
+  var n = LESSONS.length, step = (W - padR - x0) / (n - 1);
+  function X(i){ return x0 + i * step; }
+  function Y(k){ return yb - k * s / 2; }
+  var total = STATS.topics + STATS.pieces, cum = 0;
+  var ks = LESSONS.map(function(L){ cum += L.topics.length + L.newPieces.length; return Math.round(-2 + 14 * cum / total); });
+
+  var o = '<svg width="' + W + '" height="' + H + '" viewBox="0 0 ' + W + ' ' + H + '">';
+  o += '<defs><linearGradient id="staffFade" gradientUnits="userSpaceOnUse" x1="' + (W - padR + 6) + '" y1="0" x2="' + W + '" y2="0"><stop offset="0" stop-color="#111"/><stop offset="1" stop-color="#111" stop-opacity="0"/></linearGradient></defs>';
+  for (var j = 0; j < 5; j++) o += '<line x1="' + padL + '" y1="' + Y(2*j) + '" x2="' + W + '" y2="' + Y(2*j) + '" stroke="url(#staffFade)" stroke-width="1"/>';
+  o += '<line class="bar" x1="' + padL + '" y1="' + Y(8) + '" x2="' + padL + '" y2="' + Y(0) + '"/>';
+
+  LESSONS.forEach(function(L, i){
+    if (!L.unit || i === 0) return;
+    var bx = (X(i-1) + X(i)) / 2, b = s * 1.5, by = yb - 8.4 * s;
+    o += '<line class="bar" x1="' + bx + '" y1="' + Y(8) + '" x2="' + bx + '" y2="' + Y(0) + '"/>';
+    o += '<g class="reh"><rect x="' + (bx - b/2) + '" y="' + by + '" width="' + b + '" height="' + b + '"/><text x="' + bx + '" y="' + (by + b*.74) + '" text-anchor="middle">' + L.unit + '</text></g>';
+  });
+
+  LESSONS.forEach(function(L, i){
+    var x = X(i), k = ks[i], y = Y(k), on = i === sel, q;
+    var label = md(L.date) + '，第 ' + (i+1) + ' 课' + (L.review ? '，复习课' : '');
+    o += '<g class="note' + (on ? ' on' : '') + '" data-i="' + i + '" tabindex="' + (on ? 0 : -1) + '" role="button" aria-pressed="' + on + '" aria-label="' + label + '">';
+    o += '<rect class="hit" x="' + (x - step/2) + '" y="0" width="' + step + '" height="' + H + '"/>';
+    if (on) o += '<circle class="halo" cx="' + x + '" cy="' + y + '" r="' + (s * 1.35) + '"/>';
+    for (q = -2; q >= k; q -= 2) o += '<line class="ledger" x1="' + (x - rx*1.5) + '" y1="' + Y(q) + '" x2="' + (x + rx*1.5) + '" y2="' + Y(q) + '"/>';
+    for (q = 10; q <= k; q += 2) o += '<line class="ledger" x1="' + (x - rx*1.5) + '" y1="' + Y(q) + '" x2="' + (x + rx*1.5) + '" y2="' + Y(q) + '"/>';
+    o += '<ellipse class="head' + (L.review ? ' hollow' : '') + '" cx="' + x + '" cy="' + y + '" rx="' + rx + '" ry="' + ry + '" transform="rotate(-20 ' + x + ' ' + y + ')"/>';
+    var up = k < 4, sx = up ? x + rx - .8 : x - rx + .8;
+    o += '<line class="stem" x1="' + sx + '" y1="' + y + '" x2="' + sx + '" y2="' + (up ? y - 3.5*s : y + 3.5*s) + '"/>';
+    if (!narrow) o += '<text class="st-date' + (on ? ' on' : '') + '" x="' + x + '" y="' + (yb + 3.3*s) + '" text-anchor="middle">' + md(L.date) + '</text>';
+    o += '</g>';
+  });
+
+  if (narrow) {
+    var pm = 0, lastX = -99, row = 0;
+    LESSONS.forEach(function(L, i){
+      var m = +L.date.slice(5,7); if (m === pm) return; pm = m;
+      row = X(i) - lastX < 34 ? 1 - row : 0; lastX = X(i);
+      o += '<text class="st-month" x="' + X(i) + '" y="' + (yb + 3.3*s + row*14) + '" text-anchor="middle">' + m + '月</text>';
+    });
+  }
+  o += '</svg>';
+  box.innerHTML = o;
+
+  box.querySelectorAll('.note').forEach(function(g){
+    var i = +g.dataset.i;
+    g.addEventListener('click', function(){ select(i); });
+    g.addEventListener('keydown', function(e){
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); select(i, true); }
+      if (e.key === 'ArrowRight') { e.preventDefault(); select(Math.min(i + 1, n - 1), true); }
+      if (e.key === 'ArrowLeft')  { e.preventDefault(); select(Math.max(i - 1, 0), true); }
+    });
+  });
+  if (focus) box.querySelector('.note.on').focus();
+}
+
+function renderLesson(){
+  var L = LESSONS[sel], i = sel, tags = ['Lesson ' + (i+1)];
+  if (L.unit) tags.push('进入第 ' + L.unit + ' 单元');
+  if (L.review) tags.push('复习课');
+  var topics = L.topics.length
+    ? '<ul class="chips">' + L.topics.map(function(t){ return '<li title="' + CATS[t[0]] + '">' + t[1] + '</li>'; }).join('') + '</ul>'
+    : '<p class="empty">' + (L.review ? '复习前面学过的内容，查漏补缺。' : '这节课以曲目练习为主。') + '</p>';
+  var hw = L.pieces.map(function(p){ var a = p.split('|'); return '<li><span>《' + a[0] + '》</span>' + (a[1] ? '<small>' + a[1] + '</small>' : '') + '</li>'; })
+    .concat(L.tasks.map(function(t){ return '<li><span>' + t + '</span></li>'; }));
+  $('#lesson').innerHTML =
+    '<div class="l-when"><span class="l-date">' + md2(L.date) + '</span><span class="l-tags">' + tags.join(' · ') + '</span>' +
+    '<div class="l-nav"><button type="button" data-d="-1" aria-label="上一课"' + (i === 0 ? ' disabled' : '') + '>←</button>' +
+    '<button type="button" data-d="1" aria-label="下一课"' + (i === LESSONS.length - 1 ? ' disabled' : '') + '>→</button></div></div>' +
+    '<div><h4>新学内容 · NEW</h4>' + topics + '</div>' +
+    '<div><h4>课后作业 · HOMEWORK</h4>' + (hw.length ? '<ol class="hw">' + hw.join('') + '</ol>' : '<p class="empty">—</p>') + '</div>';
+  $('#lesson').querySelectorAll('[data-d]').forEach(function(b){
+    b.addEventListener('click', function(){ select(sel + (+b.dataset.d)); });
+  });
+}
+function select(i, focus){ sel = i; renderStaff(focus); renderLesson(); }
+select(sel);
+(function(){
+  var box = $('#staff'), lastW = box.clientWidth;
+  function check(){ if (box.clientWidth !== lastW) { lastW = box.clientWidth; renderStaff(); } }
+  if (window.ResizeObserver) new ResizeObserver(check).observe(box); else window.addEventListener('resize', check);
+})();
+
+/* ---------- 曲目单 ---------- */
+(function(){
+  var now = {}, groups = [], byKey = {};
+  LAST.pieces.forEach(function(p){ now[pname(p)] = 1; });
+  LESSONS.forEach(function(L){
+    L.newPieces.forEach(function(nm){
+      var key = L.date.slice(0,7);
+      if (!byKey[key]) { byKey[key] = { m:+L.date.slice(5,7), list:[] }; groups.push(byKey[key]); }
+      byKey[key].list.push({ n:nm, d:L.date });
+    });
+  });
+  $('#programme').innerHTML = groups.map(function(g){
+    return '<div class="pg"><h4><em>' + MONTH_EN[g.m] + '</em><span>' + MONTH_CN[g.m] + '</span></h4><ol>' + g.list.map(function(x){
+      return '<li><span>' + x.n + '</span>' + (now[x.n] ? '<b class="now">Now 练习中</b>' : '<span class="pd">' + md(x.d) + '</span>') + '</li>';
+    }).join('') + '</ol></div>';
+  }).join('');
+})();
+
+/* ---------- 知识地图 ---------- */
+(function(){
+  var by = {};
+  LESSONS.forEach(function(L){ L.topics.forEach(function(t){ (by[t[0]] = by[t[0]] || []).push({ t:t[1], d:L.date }); }); });
+  $('#kmap').innerHTML = ['tech','read','rhythm','harmony','key','expr'].filter(function(c){ return by[c]; }).map(function(c){
+    return '<div class="kc"><div class="kc-head"><h4>' + CATS[c] + '</h4><span class="kc-n">' + by[c].length + '</span></div><ul class="kchips">' +
+      by[c].map(function(x){ return '<li title="' + md(x.d) + ' 学习">' + x.t + '</li>'; }).join('') + '</ul></div>';
+  }).join('');
+})();
+
+/* ---------- 复制微信号 ---------- */
+(function(){
+  var toast = $('#toast'), timer;
+  function show(msg){ toast.textContent = msg; toast.classList.add('show'); clearTimeout(timer); timer = setTimeout(function(){ toast.classList.remove('show'); }, 2600); }
+  function fallback(txt){
+    var ta = document.createElement('textarea'); ta.value = txt; ta.setAttribute('readonly', '');
+    ta.style.position = 'fixed'; ta.style.opacity = '0'; document.body.appendChild(ta); ta.select();
+    var ok = false; try { ok = document.execCommand('copy'); } catch (e) {}
+    ta.remove(); return ok;
+  }
+  document.querySelectorAll('[data-copy]').forEach(function(b){
+    b.addEventListener('click', function(){
+      var txt = b.dataset.copy;
+      function done(ok){ show(ok ? '已复制微信号 ' + txt + '，打开微信添加即可' : '微信号：' + txt); }
+      if (navigator.clipboard && window.isSecureContext) navigator.clipboard.writeText(txt).then(function(){ done(true); }, function(){ done(fallback(txt)); });
+      else done(fallback(txt));
+    });
+  });
+})();
+
+/* ---------- 顶栏描边 & 滚动渐显 ---------- */
+(function(){
+  var top = $('#top');
+  function on(){ top.classList.toggle('scrolled', window.scrollY > 8); }
+  window.addEventListener('scroll', on, { passive:true }); on();
+  var els = document.querySelectorAll('.reveal');
+  if (!('IntersectionObserver' in window)) { els.forEach(function(e){ e.classList.add('in'); }); return; }
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(en){ if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); } });
+  }, { threshold:.12, rootMargin:'0px 0px -40px 0px' });
+  els.forEach(function(e){ io.observe(e); });
+})();
+</script>
+</body>
+</html>
